@@ -22,5 +22,13 @@ const hashes = walk(source).filter((p) => p.endsWith('.html')).flatMap((p) => {
 });
 const secure = headers({ hashes: [...new Set(hashes)] });
 writeFileSync(join(target,'_headers'), '/*\n' + Object.entries(secure).map(([k,v]) => `  ${k}: ${v}`).join('\n') + '\n');
-writeFileSync(join(target,'_redirects'), '/privacy /privacy/ 301\n/consent /consent/ 301\n/terms /terms/ 301\n/security /security/ 301\n');
+const redirects = [
+  'https://salman05.netlify.app/* https://salmanzub.pro/:splat 301!',
+  'http://salman05.netlify.app/* https://salmanzub.pro/:splat 301!',
+  '/privacy /privacy/ 301',
+  '/consent /consent/ 301',
+  '/terms /terms/ 301',
+  '/security /security/ 301',
+];
+writeFileSync(join(target,'_redirects'), redirects.join('\n') + '\n');
 console.log('Production artifact built in dist. Publication requires release:check and owner approval.');
