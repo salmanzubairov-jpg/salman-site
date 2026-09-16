@@ -3,5 +3,6 @@
   "privacyPolicyReviewed": false,
   "hostingAndLogsReviewed": false,
   "incidentAndTokenRevokeHandled": false,
+  "assetRightsReviewed": true,
   "ownerApprovedProduction": false
 }

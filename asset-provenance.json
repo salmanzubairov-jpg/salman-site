@@ -1,0 +1,87 @@
+{
+  "date": "2026-09-16",
+  "reason": "Owner identified decorative raster images as downloaded from Pinterest without confirmed publication rights.",
+  "excludedSourceImages": [
+    {
+      "path": "public/assets/7831a3771e1b6a6b.webp",
+      "sha256": "7831a3771e1b6a6b067c53ef0b9fe371a936e37b0779998c10bba39ac0196059"
+    },
+    {
+      "path": "public/assets/33166b8a53683a44.webp",
+      "sha256": "33166b8a53683a44c975e6e12619aacc9774d0c411cdf66f19450b9852e2b66b"
+    },
+    {
+      "path": "public/assets/064af226c85854a1.webp",
+      "sha256": "064af226c85854a10f5a06263336b6704677f2587596b1cc27bc0890dcd6efa6"
+    },
+    {
+      "path": "public/assets/572f827e49ce70fc.webp",
+      "sha256": "572f827e49ce70fc33537c14ba00041fa57370b0628f82d6bbfcdebf9a9aa66a"
+    },
+    {
+      "path": "public/assets/ac245a3c4a5efd35.webp",
+      "sha256": "ac245a3c4a5efd3572353b59588b06353b622dc6c0669e8518c48decb0e9a8c8"
+    },
+    {
+      "path": "public/og.jpg",
+      "sha256": "66b1017e415bcfa65782ace2f8a3c0f35640a2303e8c3d8235019f1cc0be9912"
+    },
+    {
+      "path": "app-dashboard.png",
+      "sha256": "348435f9755d469197b175a9486b574e4060ff7f26705c8af9c44e4fc92b4666"
+    },
+    {
+      "path": "code-room.png",
+      "sha256": "675e0601c58a065a034c2884a49b77b62eb9107029b14a1dcef8385d1e2ed878"
+    },
+    {
+      "path": "coder.png",
+      "sha256": "96dad4ffa044d3fa158ea0fa5a8caf31276bd3ebaf3a8eeb8f26c371161a0479"
+    },
+    {
+      "path": "faq-bg.png",
+      "sha256": "b2919451afda9b5fe93134e027d5aca6f84c5bcc84532e598969c3db40336211"
+    },
+    {
+      "path": "hero-bg.png",
+      "sha256": "96dad4ffa044d3fa158ea0fa5a8caf31276bd3ebaf3a8eeb8f26c371161a0479"
+    },
+    {
+      "path": "hero-results.png",
+      "sha256": "d8c45887b549cb1441bc03af7fa0e182159e3147e7ad4c9f3e6b19462c1f92d9"
+    }
+  ],
+  "newIllustrations": [
+    {
+      "path": "public/assets/studio-atmosphere.svg",
+      "source": "Original SVG geometry written for this project; no source bitmap, stock download or third-party artwork embedded."
+    },
+    {
+      "path": "public/assets/interface-preview.svg",
+      "source": "Original SVG geometry written for this project; no source bitmap, stock download or third-party artwork embedded."
+    },
+    {
+      "path": "public/assets/service-layers.svg",
+      "source": "Original SVG geometry written for this project; no source bitmap, stock download or third-party artwork embedded."
+    },
+    {
+      "path": "public/assets/workspace-preview.svg",
+      "source": "Original SVG geometry written for this project; no source bitmap, stock download or third-party artwork embedded."
+    },
+    {
+      "path": "public/assets/conversation-flow.svg",
+      "source": "Original SVG geometry written for this project; no source bitmap, stock download or third-party artwork embedded."
+    }
+  ],
+  "socialCard": {
+    "path": "public/og.png",
+    "editableSource": "design/og.svg",
+    "source": "Rendered from original project SVG graphics and project title; no source photograph used."
+  },
+  "portrait": {
+    "path": "public/assets/6d69226f4d990c57.jpg",
+    "ownerConfirmsLikeness": true,
+    "photographerPermission": "Owner confirmed on 2026-09-16 that he took the portrait himself"
+  },
+  "archive": "work/retired-pinterest-assets (local, Git-ignored). Includes original repository PNGs, previous public WebPs and the old social card. Original PNG hashes verified after moving. Earlier remote main, history and backup remain; no history rewrite."
+}

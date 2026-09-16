@@ -4,15 +4,25 @@ import { resolve, sep, extname, join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 const root = resolve('dist');
 const port = Number(process.env.PORT || 4173);
-const rawHeaders = await readFile(join(root,'_headers'),'utf8');
-const configured = Object.fromEntries(rawHeaders.split('\n').filter((l)=>l.startsWith('  ')).map((l)=>{const i=l.indexOf(':');return [l.slice(2,i),l.slice(i+1).trim()];}));
-if(process.env.CSP_REPORT_ONLY === '1') {
-  configured['Content-Security-Policy-Report-Only'] = configured['Content-Security-Policy'];
-  delete configured['Content-Security-Policy'];
+async function readConfiguredHeaders() {
+  // A rebuild can change inline JSON-LD and its CSP hash while preview is running.
+  const rawHeaders = await readFile(join(root,'_headers'),'utf8');
+  const configured = Object.fromEntries(rawHeaders.split('\n').filter((l)=>l.startsWith('  ')).map((l)=>{const i=l.indexOf(':');return [l.slice(2,i),l.slice(i+1).trim()];}));
+  if(process.env.CSP_REPORT_ONLY === '1') {
+    configured['Content-Security-Policy-Report-Only'] = configured['Content-Security-Policy'];
+    delete configured['Content-Security-Policy'];
+  }
+  return configured;
 }
-const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json','.webmanifest':'application/manifest+json','.svg':'image/svg+xml','.webp':'image/webp','.jpg':'image/jpeg','.woff2':'font/woff2','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8'};
+const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json','.webmanifest':'application/manifest+json','.svg':'image/svg+xml','.webp':'image/webp','.jpg':'image/jpeg','.png':'image/png','.woff2':'font/woff2','.txt':'text/plain; charset=utf-8','.xml':'application/xml; charset=utf-8'};
 createServer(async(req,res)=>{
-  Object.entries(configured).forEach(([k,v])=>res.setHeader(k,v));
+  try {
+    Object.entries(await readConfiguredHeaders()).forEach(([k,v])=>res.setHeader(k,v));
+  } catch {
+    res.writeHead(503,{'Content-Type':'text/plain; charset=utf-8','Cache-Control':'no-store'});
+    res.end(req.method==='HEAD'?undefined:'Preview build is unavailable. Run the build and reload.');
+    return;
+  }
   res.setHeader('Cache-Control','no-store');
   if(!['GET','HEAD'].includes(req.method)) {res.writeHead(405,{'Allow':'GET, HEAD'});res.end();return;}
   try {

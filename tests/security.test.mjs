@@ -55,5 +55,18 @@ test('security.txt and legal drafts are explicit',()=>{
   assert.match(s,/Contact: https:\/\/t.me\/salmzyb/);assert.match(s,/Canonical: https:\/\/salmanzub.pro\/\.well-known\/security.txt/);
   assert.ok(Date.parse(s.match(/Expires: (.*)/)[1])>Date.now());
   for(const slug of ['privacy','consent','terms'])assert.match(readFileSync(`public/${slug}/index.html`,'utf8'),/Черновик для проверки владельцем/);
-  assert.ok(Object.values(JSON.parse(readFileSync('release-review.json','utf8'))).every((v)=>v===false));
+  const review=JSON.parse(readFileSync('release-review.json','utf8'));
+  assert.equal(review.privacyPolicyReviewed,false,'Legal drafts cannot be marked approved');
+  assert.equal(review.ownerApprovedProduction,false,'This draft has no production approval');
+});
+test('Retired artwork is not distributed in public files or the build',()=>{
+  const provenance=JSON.parse(readFileSync('asset-provenance.json','utf8'));
+  const excluded=new Set(provenance.excludedSourceImages.map((item)=>item.sha256));
+  for(const file of [...walk('public'),...walk('dist')]){
+    assert.ok(!excluded.has(createHash('sha256').update(readFileSync(file)).digest('hex')), 'Retired artwork in publication: '+file);
+  }
+  for(const item of provenance.newIllustrations){
+    const svg=readFileSync(item.path,'utf8');
+    assert.doesNotMatch(svg,/<(?:script|image|foreignObject)\b|(?:href|src)=/i,item.path);
+  }
 });
