@@ -1,0 +1,8 @@
+{
+  "retrieved": "2026-09-16",
+  "source": "https://salmanzub.pro/",
+  "deploy": "6a6fc8f30862f57e7c88f83a",
+  "gitBase": "7f8bf0c",
+  "method": "Extracted static template and assets; removed dynamic runtime; native details and static contact links",
+  "secretsImported": false
+}

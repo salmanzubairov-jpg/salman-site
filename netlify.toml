@@ -1,0 +1,12 @@
+[build]
+  command = "node scripts/build.mjs"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[context.production]
+  command = "node scripts/release-check.mjs && node scripts/build.mjs"
+
+# Security headers are generated as dist/_headers from scripts/security.mjs.
+# Existing production is a manual Drop deploy. This does not connect or publish it.
